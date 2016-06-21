@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.HttpEntity;
-import org.apache.http.HttpHost;
 import org.apache.http.HttpStatus;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
@@ -38,10 +37,8 @@ public class ClientUtil {
     }
 
     private String exec(HttpUriRequest request) {
-        HttpHost proxy = new HttpHost("148.87.19.20", 80);
         try {
-            CloseableHttpClient client = HttpClientBuilder.create().setProxy(proxy).build();
-            // CloseableHttpClient client = HttpClientBuilder.create().build();
+            CloseableHttpClient client = HttpClientBuilder.create().build();
             CloseableHttpResponse httpResponse = client.execute(request);
             HttpEntity entity = httpResponse.getEntity();
             byte[] bytes = {};
