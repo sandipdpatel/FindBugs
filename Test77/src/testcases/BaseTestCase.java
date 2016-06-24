@@ -1,6 +1,6 @@
 package testcases;
 
-public class BaseTest {
+public class BaseTestCase {
 
     protected static final String BASE_URL = "http://findthebug.herokuapp.com";
 }

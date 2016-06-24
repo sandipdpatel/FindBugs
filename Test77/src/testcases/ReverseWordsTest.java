@@ -15,7 +15,7 @@ import utilities.BuildURL;
 import utilities.ClientUtil;
 
 @RunWith(Parameterized.class)
-public class ReverseWordsTest extends BaseTest {
+public class ReverseWordsTest extends BaseTestCase {
 
     private String input;
     private final String queryParam = "string";
@@ -44,7 +44,7 @@ public class ReverseWordsTest extends BaseTest {
         try {
             Assert.assertTrue("Missing starting Quote", response.startsWith("\""));
             Assert.assertTrue("Missing ending Quote", response.endsWith("\""));
-            Assert.assertTrue("String mismatch, input:" + input + " response:" + response, compareSentences(input, response));
+            Assert.assertTrue("String mismatch, [input]:" + input + " [response]:" + response, compareSentences(input, response));
         } catch (Exception e) {
             buffer.append(e.getMessage());
         }
@@ -62,7 +62,7 @@ public class ReverseWordsTest extends BaseTest {
         StringBuffer buffer = new StringBuffer();
         try {
             Assert.assertEquals("Quotes missing in response, " + response, 2, response.length() - response.replaceAll("\"", "").length());
-            Assert.assertTrue("String mismatch. input:" + input + " response:" + response, compareSentences(input, response));
+            Assert.assertTrue("String mismatch. [input]:" + input + " [response]:" + response, compareSentences(input, response));
         } catch (Exception e) {
             buffer.append(e.getMessage());
         }

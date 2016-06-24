@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="test" default="test" basedir=".">
+    <property name="src" value="./src" />
+    <property name="lib" value="./libs" />
+    <property name="bin" value="./bin" />
+    <property name="report" value="./report" />
+    <path id="test.classpath">
+        <pathelement location="${bin}" />
+        <fileset dir="${lib}">
+            <include name="**/*.jar" />
+        </fileset>
+    </path>
+    <target name="clean">
+        <delete dir="${bin}" />
+        <mkdir dir="${bin}" />
+    </target>
+    <target name="compile" depends="clean">
+        <javac includeantruntime="false" source="1.8" srcdir="${src}" fork="true" destdir="${bin}" >
+            <classpath>
+                <pathelement path="${bin}"></pathelement>
+                <fileset dir="${lib}">
+                    <include name="**/*.jar" />
+                </fileset>
+            </classpath>
+        </javac>
+    </target>
+    <target name="test" depends="compile">
+        <delete dir="${report}" />
+        <mkdir dir="${report}" />
+        <mkdir dir="${report}/xml" />
+		<junit printsummary="on" haltonfailure="no" showoutput="yes" fork="true">
+			<classpath>
+				<path refid="test.classpath" />
+                <fileset dir="${lib}">
+                    <include name="**/*.jar" />
+                </fileset>
+			</classpath>
+			<formatter type="xml" />
+			<batchtest todir="${report}/xml">
+				<fileset dir="${src}" includes="**/testcases/*Test.java" />
+			</batchtest>
+		</junit>
+        <junitreport todir="${report}">
+            <fileset dir="${report}/xml">
+                <include name="TEST*.xml" />
+            </fileset>
+            <report format="frames" todir="${report}/html" />
+        </junitreport>
+    </target>
+</project>

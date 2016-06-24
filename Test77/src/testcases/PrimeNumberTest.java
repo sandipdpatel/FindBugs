@@ -15,7 +15,7 @@ import utilities.BuildURL;
 import utilities.ClientUtil;
 
 @RunWith(Parameterized.class)
-public class PrimeNumberTest extends BaseTest {
+public class PrimeNumberTest extends BaseTestCase {
 
     private int input;
     private final String queryParam = "number";
@@ -45,7 +45,7 @@ public class PrimeNumberTest extends BaseTest {
         String response = new ClientUtil().getRequest(url);
         StringBuffer buffer = new StringBuffer();
         try {
-            Assert.assertEquals("Invalid response, input:" + input + " response:" + response, isPrime(input), Boolean.parseBoolean(response));
+            Assert.assertEquals("Invalid response, [input]:" + input + " [response]:" + response, isPrime(input), Boolean.parseBoolean(response));
         } catch (Exception e) {
             buffer.append(e.getMessage());
         }
@@ -62,7 +62,7 @@ public class PrimeNumberTest extends BaseTest {
         String response = new ClientUtil().postRequest(url, fieldName, String.valueOf(input));
         StringBuffer buffer = new StringBuffer();
         try {
-            Assert.assertEquals("Invalid response, input:" + input + " response:" + response, isPrime(input), Boolean.parseBoolean(response));
+            Assert.assertEquals("Invalid response, [input]:" + input + " [response]:" + response, isPrime(input), Boolean.parseBoolean(response));
         } catch (Exception e) {
             buffer.append(e.getMessage());
         }
